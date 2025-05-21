@@ -59,7 +59,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(userWithoutPassword);
       return true;
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Ошибка входа", error);
       return false;
     }
   };
@@ -90,7 +90,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(userWithoutPassword);
       return true;
     } catch (error) {
-      console.error("Registration failed", error);
+      console.error("Ошибка регистрации", error);
       return false;
     }
   };
