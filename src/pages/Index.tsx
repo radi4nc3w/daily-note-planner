@@ -5,9 +5,11 @@ import { EventForm } from "@/components/EventForm";
 import { ConflictAnalyzer } from "@/components/ConflictAnalyzer";
 import { UpcomingEvents } from "@/components/UpcomingEvents";
 import { Navigation } from "@/components/Navigation";
+import { useEvents } from "@/contexts/EventContext";
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date());
+  const { addEvent } = useEvents();
 
   return (
     <div className="min-h-screen">
@@ -19,7 +21,7 @@ const Index = () => {
             <ConflictAnalyzer />
           </div>
           <div className="space-y-6">
-            <EventForm selectedDate={selectedDate} />
+            <EventForm selectedDate={selectedDate} onSubmit={addEvent} />
             <UpcomingEvents />
           </div>
         </div>
