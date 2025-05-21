@@ -1,7 +1,6 @@
 
 import React from "react";
 import { format, formatDistance } from "date-fns";
-import { ru } from "date-fns/locale";
 import { Clock, MapPin, Trash, ArrowRight } from "lucide-react";
 import { useEvents } from "@/contexts/EventContext";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -51,7 +50,7 @@ export const EventList: React.FC<EventListProps> = ({
       <Card className="mb-6">
         <CardHeader>
           <CardTitle>{title}</CardTitle>
-          <CardDescription>Нет запланированных событий</CardDescription>
+          <CardDescription>No events scheduled</CardDescription>
         </CardHeader>
       </Card>
     );
@@ -63,8 +62,7 @@ export const EventList: React.FC<EventListProps> = ({
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription>
-            {events.length} {events.length === 1 ? 'событие запланировано' : 
-              events.length >= 2 && events.length <= 4 ? 'события запланировано' : 'событий запланировано'}
+            {events.length} event{events.length !== 1 ? 's' : ''} scheduled
           </CardDescription>
         </CardHeader>
         <CardContent className="px-0 pt-0">
@@ -101,8 +99,7 @@ export const EventList: React.FC<EventListProps> = ({
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>
-          {events.length} {events.length === 1 ? 'событие запланировано' : 
-            events.length >= 2 && events.length <= 4 ? 'события запланировано' : 'событий запланировано'}
+          {events.length} event{events.length !== 1 ? 's' : ''} scheduled
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -139,12 +136,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, showActions, onDelete, onM
       <CardHeader className="p-3">
         <div className="flex justify-between items-start">
           <CardTitle className="text-base">{event.title}</CardTitle>
-          {isPast && <Badge variant="outline">Прошедшее</Badge>}
+          {isPast && <Badge variant="outline">Past</Badge>}
         </div>
         <CardDescription className="text-sm">
           <div className="flex items-center mt-1">
             <Clock className="w-4 h-4 mr-1 inline" />
-            <span>{format(startTime, "HH:mm", { locale: ru })} • {event.duration} мин.</span>
+            <span>{format(startTime, "HH:mm")} • {event.duration} min</span>
           </div>
           <div className="flex items-center mt-1">
             <MapPin className="w-4 h-4 mr-1 inline" />
@@ -165,7 +162,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, showActions, onDelete, onM
             onClick={() => onDelete(event.id)}
           >
             <Trash className="w-3 h-3 mr-1" />
-            Удалить
+            Remove
           </Button>
           {isPast && (
             <Button 
@@ -174,7 +171,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, showActions, onDelete, onM
               onClick={() => onMoveToTomorrow(event.id)}
             >
               <ArrowRight className="w-3 h-3 mr-1" />
-              На завтра
+              Tomorrow
             </Button>
           )}
         </CardFooter>
