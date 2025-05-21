@@ -1,6 +1,7 @@
 
 import React from "react";
 import { format, addDays, startOfDay, endOfDay } from "date-fns";
+import { ru } from "date-fns/locale";
 import { useEvents } from "@/contexts/EventContext";
 import { EventList } from "@/components/EventList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -49,30 +50,30 @@ export const UpcomingEvents: React.FC = () => {
     <Tabs defaultValue="tomorrow">
       <TabsList className="grid w-full grid-cols-3 mb-4">
         <TabsTrigger value="tomorrow">
-          Tomorrow
+          Завтра
         </TabsTrigger>
         <TabsTrigger value="day-after">
-          {format(addDays(today, 2), "EEE, MMM d")}
+          {format(addDays(today, 2), "EEE, d MMM", { locale: ru })}
         </TabsTrigger>
         <TabsTrigger value="later">
-          Later
+          Позже
         </TabsTrigger>
       </TabsList>
       <TabsContent value="tomorrow">
         <EventList 
-          title={`Tomorrow: ${format(addDays(today, 1), "EEEE, MMMM d")}`} 
+          title={`Завтра: ${format(addDays(today, 1), "EEEE, d MMMM", { locale: ru })}`} 
           events={tomorrowEvents} 
         />
       </TabsContent>
       <TabsContent value="day-after">
         <EventList 
-          title={format(addDays(today, 2), "EEEE, MMMM d")} 
+          title={format(addDays(today, 2), "EEEE, d MMMM", { locale: ru })} 
           events={dayAfterTomorrowEvents} 
         />
       </TabsContent>
       <TabsContent value="later">
         <EventList 
-          title="Upcoming Events" 
+          title="Предстоящие события" 
           events={laterEvents} 
         />
       </TabsContent>
